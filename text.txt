@@ -1,0 +1,263 @@
+⁠ ⁠ ⁠index.html.
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الانضمام إلى مجموعة الواتساب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-icon {
+            font-size: 65px;
+            color: #25D366;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .phone-wrapper {
+            display: flex;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fdfdfd;
+            transition: border-color 0.3s;
+        }
+        .phone-wrapper:focus-within {
+            border-color: #25D366;
+        }
+        select, input[type="tel"], input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background: transparent;
+        }
+        select {
+            width: 125px;
+            border-left: 2px solid #e1e8ed;
+            background: #f7f9fa;
+            cursor: pointer;
+            text-align: center;
+        }
+        .code-input {
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            background: #fdfdfd;
+            text-align: center;
+            letter-spacing: 5px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+        .code-input:focus {
+            border-color: #25D366;
+        }
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 6px;
+            text-align: right;
+            display: none;
+        }
+        .btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        .btn:hover {
+            background-color: #22bf5b;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الخطوة الأولى: رقم الهاتف -->
+        <div id="step1" class="step active">
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h2>الانضمام إلى المجموعة</h2>
+            <form id="form1" onsubmit="goToStep2(event)">
+                <div class="input-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <div class="phone-wrapper">
+                        <input type="tel" id="phone" placeholder="أدخل رقم هاتفك" required pattern="[0-9]+" title="الرجاء إدخال أرقام فقط">
+                        <select id="countryCode">
+                            <!-- الدول العربية -->
+                            <optgroup label="الدول العربية">
+                                <option value="+212">🇲🇦 +212 المغرب</option>
+                                <option value="+961">🇱🇧 +961 لبنان</option>
+                                <option value="+962">🇯🇴 +962 الأردن</option>
+                                <option value="+966">🇸🇦 +966 السعودية</option>
+                                <option value="+971">🇦🇪 +971 الإمارات</option>
+                                <option value="+20">🇪🇬 +20 مصر</option>
+                                <option value="+965">🇰🇼 +965 الكويت</option>
+                                <option value="+974">🇶🇦 +974 قطر</option>
+                            </optgroup>
+                            <!-- دول أوروبا -->
+                            <optgroup label="دول أوروبا">
+                                <option value="+44">🇬🇧 +44 المملكة المتحدة</option>
+                                <option value="+33">🇫🇷 +33 فرنسا</option>
+                                <option value="+49">🇩🇪 +49 ألمانيا</option>
+                                <option value="+39">🇮🇹 +39 إيطاليا</option>
+                                <option value="+34">🇪🇸 +34 إسبانيا</option>
+                                <option value="+31">🇳🇱 +31 هولندا</option>
+                                <option value="+32">🇧🇪 +32 بلجيكا</option>
+                                <option value="+41">🇨🇭 +41 سويسرا</option>
+                                <option value="+43">🇦🇹 +43 النمسا</option>
+                                <option value="+46">🇸🇪 +46 السويد</option>
+                                <option value="+47">🇳🇴 +47 النرويج</option>
+                                <option value="+45">🇩🇰 +45 الدنمارك</option>
+                                <option value="+358">🇫🇮 +358 فنلندا</option>
+                                <option value="+351">🇵🇹 +351 البرتغال</option>
+                                <option value="+30">🇬🇷 +30 اليونان</option>
+                                <option value="+353">🇮🇪 +353 أيرلندا</option>
+                                <option value="+48">🇵🇱 +48 بولندا</option>
+                                <option value="+420">🇨🇿 +420 التشيك</option>
+                                <option value="+36">🇭🇺 +36 المجر</option>
+                                <option value="+40">🇷🇴 +40 رومانيا</option>
+                                <option value="+359">🇧🇬 +359 بلغاريا</option>
+                                <option value="+385">🇭🇷 +385 كرواتيا</option>
+                                <option value="+386">🇸🇮 +386 سلوفينيا</option>
+                                <option value="+421">🇸🇰 +4 Slovak +421</option>
+                                <option value="+372">🇪🇪 +372 إستونيا</option>
+                                <option value="+371">🇱🇻 +371 لاتفيا</option>
+                                <option value="+370">🇱🇹 +370 ليتوانيا</option>
+                                <option value="+356">🇲🇹 +356 مالطا</option>
+                                <option value="+357">🇨🇾 +357 قبرص</option>
+                                <option value="+352">🇱🇺 +352 لوكسمبورغ</option>
+                                <option value="+354">🇮🇸 +354 أيسلندا</option>
+                                <option value="+380">🇺🇦 +380 أوكرانيا</option>
+                                <option value="+373">🇲🇩 +373 مولدوفا</option>
+                                <option value="+381">🇷🇸 +381 صربيا</option>
+                                <option value="+387">🇧🇦 +387 البوسنة والهرسك</option>
+                                <option value="+382">🇲🇪 +382 الجبل الأسود</option>
+                                <option value="+389">🇲🇰 +389 مقدونيا الشمالية</option>
+                                <option value="+355">🇦🇱 +355 ألبانيا</option>
+                                <option value="+376">🇦🇩 +376 أندورا</option>
+                                <option value="+378">🇸🇲 +378 سان مارينو</option>
+                                <option value="+375">🇧🇾 +375 بيلاروسيا</option>
+                                <option value="+370">🇱🇹 +370 ليتوانيا</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn">الانضمام إلى المجموعة</button>
+            </form>
+        </div>
+
+        <!-- الخطوة الثانية: إدخال رمز الإضافة -->
+        <div id="step2" class="step">
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h2>ادخل رمز الاضافه</h2>
+            <form id="form2" onsubmit="verifyCode(event)">
+                <div class="input-group">
+                    <label for="verificationCode">أدخل الرمز (6 أرقام):</label>
+                    <input type="text" id="verificationCode" class="code-input" maxlength="6" inputmode="numeric" placeholder="------" required oninput="validateDigits(this)">
+                    <div id="errorText" class="error-msg">الرمز الذي أدخلتم غير صحيح</div>
+                </div>
+                <button type="submit" class="btn">متابعة</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // السماح بالأرقام فقط ومنع النقاط أو العوارض في خانة الرمز
+        function validateDigits(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        function goToStep2(event) {
+            event.preventDefault();
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        }
+
+        function verifyCode(event) {
+            event.preventDefault();
+            const codeInput = document.getElementById('verificationCode').value;
+            const errorText = document.getElementById('errorText');
+
+            // الرمز الصحيح الافتراضي
+            const correctCode = "123456"; 
+
+            if (codeInput === correctCode) {
+                alert("تم التحقق بنجاح! سيتم تحويلك للمجموعة.");
+            } else {
+                // إظهار رسالة الخطأ باللون الأحمر تحت الخانة
+                errorText.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
